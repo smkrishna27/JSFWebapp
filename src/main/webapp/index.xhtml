@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<f:loadBundle basename="application" var="app" />
+<head>
+<title><h:outputText value="#{app.title}" /></title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="jqwidgets/styles/jqx.base.css"
+	type="text/css" />
+<link rel="stylesheet" href="jqwidgets/styles/jqx.bootstrap.css"
+	type="text/css" />
+<!-- <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script> -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.storage.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.columnsreorder.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxcheckbox.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxwindow.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxtabs.js"></script>
+<script type="text/javascript" src="scripts/demos.js"></script>
+<script type="text/javascript">
+	    	$(document).ready(function (){
+	    		var source = {
+	    			datatype: "json",
+	    			datafields: [{
+	    				name: 'recepientId',
+	    				type: 'int'
+	    			}, {
+	    				name: 'recepientName',
+	    				type: 'string'
+	    			}, {
+	    				name: 'bankInfo',
+	    				type: 'string'
+	    			}, {
+	    				name: 'transitInfo',
+	    				type: 'string'
+	    			}],
+	    			id: 'recepientId',
+		        	localdata: '#{recepientBean.loadAll()}'
+	    		};
+
+	    		var source1 = {
+		    			datatype: "json",
+		    			datafields: [{
+		    				name: 'recepientId',
+		    				type: 'int'
+		    			}, {
+		    				name: 'recepientName',
+		    				type: 'string'
+		    			}, {
+		    				name: 'bankInfo',
+		    				type: 'string'
+		    			}, {
+		    				name: 'transitInfo',
+		    				type: 'string'
+		    			}],
+		    			id: 'recepientId',
+			        	localdata: '#{recepientBean.search()}'
+		    		};
+	    		
+	    		//var dataAdapter = new $.jqx.dataAdapter(source);
+	    		var dataAdapter1 = new $.jqx.dataAdapter(source1);
+	    		$("#addWindowButton").jqxButton({ theme: 'bootstrap' });
+            	$("#searchWindowButton").jqxButton({ theme: 'bootstrap' });
+	    		$('#gridData').jqxGrid({
+					theme: 'bootstrap',
+	    			width: 850,
+	                source: source,
+	                selectionmode: 'multiplerowsextended',
+	                sortable: true,
+	                pageable: true,
+	                autoheight: true,
+	                autoloadstate: false,
+	                autosavestate: false,
+	                columnsresize: true,
+	                columnsreorder: true,
+	                showfilterrow: true,
+	                filterable: true,
+	                columns: [{
+	                	text: 'Recepient ID',
+		            	datafield: 'recepientId',
+		            	width: 100
+	                }, {
+	                	text: 'Recepient Name',
+	                	datafield: 'recepientName',
+	                	width: 250
+	                },{
+	                	text: 'Bank Info',
+	                	datafield: 'bankInfo',
+	                	width: 250
+	                }, {
+	                	text: 'Transit Info',
+	                	datafield: 'transitInfo',
+	                	width: 250
+	                }]
+	    		
+	    		});
+	    	
+
+	    	$('#resultData').jqxGrid({
+				theme: 'bootstrap',
+    			width: 850,
+    			height: 300,
+    			source: source1,
+                selectionmode: 'multiplerowsextended',
+                sortable: true,
+                pageable: true,
+                autoheight: true,
+                autoloadstate: false,
+                autosavestate: false,
+                columnsresize: true,
+                columnsreorder: true,
+                showfilterrow: true,
+                filterable: true,
+                columns: [{
+                	text: 'Recepient ID',
+	            	datafield: 'recepientId',
+	            	width: 100
+                }, {
+                	text: 'Recepient Name',
+                	datafield: 'recepientName',
+                	width: 250
+                },{
+                	text: 'Bank Info',
+                	datafield: 'bankInfo',
+                	width: 250
+                }, {
+                	text: 'Transit Info',
+                	datafield: 'transitInfo',
+                	width: 250
+                }]
+    		});
+	    	
+    	});
+
+	    	function addDialog() {
+	    		$("#addOfDialogPlaceHolder").dialog({
+	    			height: "100%", width: "60%",
+	    			title: 'Recepient Form', modal: true, resizable: true,
+	    			buttons: {}
+	    		});
+	    		
+	    	};
+	    	
+	        function searchDialog() {
+	    		$("#searchOfDialogPlaceHolder").dialog( {
+	    			height: "100%", width: "575",
+	    			title: 'Search Recepient', modal: false, resizable: true,
+	    			autoOpen: true,
+	    			autoClose: false,
+	    			buttons: {}
+	    		});
+	    		
+	    	}; 
+
+	    	function showresults() {
+	    		$("#searchOfDialogPlaceHolder").dialog({
+	    			height: "100%", width: "575",
+	    			title: 'showresults Recepient', modal: true, resizable: true,
+	    			autoOpen :true,
+	    			buttons: {}
+	    		})
+	    		return false;
+	    	};
+
+	  	    </script>
+</head>
+<body class="default">
+	<div id="widget">
+		<div style="float: left;" id="gridData"></div>
+		<div style="margin-left: 30px; float: left;">
+			<div style="margin-top: 10px;">
+				<input type="button" id="addWindowButton" value="Add Recepient"
+					onclick="addDialog(); return false;"  />
+			</div>
+			<div style="margin-top: 10px;">
+				<input type="button" id="searchWindowButton"
+					value="Search Recepient" onclick="searchDialog(); return true;"  />
+			</div>
+		</div>
+
+		<h:panelGroup id="addOfDialogPlaceHolder" style="display:none">
+			<h:form id="addForm">
+				<table width="100%" >
+					<tr align="justify" valign="middle">
+						<td align="center"><label>Recepient ID</label></td>
+						<td><h:inputText id="recepientId"
+								value="#{recepientBean.recepientItem.recepientId}" required="true"/></td>
+						
+						<td align="center"><label >Recepient Name</label></td>
+						<td><h:inputText id="recepientName"
+								value="#{recepientBean.recepientItem.recepientName}" /></td>
+					</tr>
+					<tr valign="middle" ><td height="4"></td></tr>
+					<tr align="center">
+						<td></td>
+					</tr>
+					<tr align="justify" valign="middle">
+						<td align="center"><label>address1</label></td>
+						<td><h:inputTextarea id="address1"
+								value="#{recepientBean.recepientItem.address1}" /></td>
+						<td align="center"><label>address2</label></td>
+						<td><h:inputTextarea id="address2"
+								value="#{recepientBean.recepientItem.address2}" /></td>
+					</tr>
+					<tr valign="middle" ><td height="4"></td></tr>
+					<tr>
+						<td align="center"><label>city</label></td>
+						<td><h:inputText id="city"
+								value="#{recepientBean.recepientItem.city}"  /></td>
+						<td align="center"><label>zipCode</label></td>
+						<td><h:inputText id="zipCode"
+								value="#{recepientBean.recepientItem.zipCode}" /></td>
+					</tr>
+					<tr valign="middle" ><td height="4"></td></tr>
+					<tr>
+						<td align="center"><label>Bank Info</label></td>
+						<td><h:inputText id="bankInfo"
+								value="#{recepientBean.recepientItem.bankInfo}" /></td>
+						<td align="center"><label>Transit Info</label></td>
+						<td><h:inputText id="transitInfo"
+								value="#{recepientBean.recepientItem.transitInfo}" /></td>
+					</tr>
+				<tr valign="middle" ><td height="10"></td></tr>
+				<tr>
+					<td align="center" colspan="4"><h:commandButton value="Add to Grid" action="#{recepientBean.save}" />
+					</td>
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>
+		
+		<h:panelGroup id="searchOfDialogPlaceHolder" style="display:none" rendered="true"  >
+			<h:form id="searchForm" rendered="true" >
+				<pre>
+				Recepient ID	: <h:inputText id="recepientId"
+						value="#{recepientBean.recepientItem.recepientId}" />
+					<br /><br />
+				Recepient Name	: <h:inputText id="recepientName"
+						value="#{recepientBean.recepientItem.recepientName}" />
+					<br /><br />				
+				<center>
+				
+						<h:commandButton value="Search" action="#{recepientBean.searchresult}" onclick="searchDialog()"   />
+					</center>
+					
+			</pre>			
+			
+			<post>
+				<h:outputText id="showresult" value="#{recepientBean.search()}"  escape="false"/>
+					<br /><br />				
+				<center>
+						<h:commandButton value="Search" onclick="showresults2()" />
+					</center>					
+			</post>	
+
+			</h:form>
+			
+						
+		
+		</h:panelGroup>
+		
+		<h:panelGroup id="showresults" style="display:none" rendered="true">
+			<h:form id="searchForm1">
+				<post>
+				<h:outputText id="showresults2" value="#{recepientBean.search()}" />
+					<br /><br />				
+				<center>
+						<h:commandButton value="Search" onclick="showresults2()" />
+					</center>					
+			</post>	
+			
+
+			</h:form>
+			
+		
+		</h:panelGroup>
+		
+		
+		
+		
+		
+		<!-- <h:panelGrid id="showresults" style="display:none">
+			<div style="float: left;" id="resultData"></div>			
+		</h:panelGrid> -->
+		<!-- <div style="float: left;" id="resultData"></div> -->
+
+	</div>
+</body>
+</html>
