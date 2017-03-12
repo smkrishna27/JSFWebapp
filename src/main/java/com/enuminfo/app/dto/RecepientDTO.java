@@ -15,8 +15,9 @@ public class RecepientDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int recepientId;
-	private String recepientName=" ", bankInfo, transitInfo;
+	private String recepientName="", bankInfo, transitInfo;
 	private String address1,address2,city,zipCode;
+	private boolean selectCheckbox;
 	
 	public RecepientDTO() {
 		// TODO Auto-generated constructor stub
@@ -152,5 +153,13 @@ public class RecepientDTO implements Serializable {
 
 	public void setTransitInfo(String transitInfo) {
 		this.transitInfo = transitInfo;
+	}
+
+	public boolean isSelectCheckbox() {
+		return selectCheckbox;
+	}
+
+	public void setSelectCheckbox(boolean selectCheckbox) {
+		this.selectCheckbox = selectCheckbox;
 	}
 }
